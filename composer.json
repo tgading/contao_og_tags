@@ -1,10 +1,10 @@
 {
     "name": "og_tags",
     "description":"Open graph protocol module for Contao",
-    "keywords":["contao", "open", "geo", "map"],
+    "keywords":["contao", "open", "graph", "protocol", "module", "og", "tags", "og-tags"],
     "type": "contao-module",
-    "homepage":"https://github.com/tgading/contao_og_tags",
-    "license":"LGPL-3.0+",
+    "homepage":"https://github.com/tgading/og_tags",
+    "license":"LGPL",
     "authors":[
         {
             "name":"Thorsten Gading",
@@ -14,11 +14,10 @@
         }
     ],
     "support":{
-        "issues":"https://github.com/tgading/contao_og_tags/issues"
+        "issues":"https://github.com/tgading/og_tags/issues"
     },
     "require": {
-        "contao/core": ">=3.0,<4-dev",
-        "contao-community-alliance/composer-installer": "*",
+        "contao/core": ">=3.0,<4-dev"
     },
     "autoload": {
         "classmap": [""]

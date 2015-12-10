@@ -7,4 +7,4 @@ Copyright (c) 2015 Thorsten Gading
 
 ---
 
-This Version is compatible with Contao 3.0.x.
+This Version is compatible with Contao 3.x.
