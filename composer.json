@@ -1,7 +1,7 @@
 {
     "name": "og_tags",
     "description":"Open graph protocol module for Contao",
-    "keywords":["contao", "open", "graph", "protocol", "module", "og", "tags", "og-tags"],
+    "keywords":["og", "tags", "open", "graph", "protocol", "og-tags", "contao", "module"],
     "type": "contao-module",
     "homepage":"https://github.com/tgading/og_tags",
     "license":"LGPL",

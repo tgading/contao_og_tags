@@ -3,7 +3,7 @@ og_tags
 
 Extension for Contao CMS
 
-Copyright (c) 2015 Thorsten Gading
+Copyright (c) 2016 Thorsten Gading
 
 ---
 
