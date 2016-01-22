@@ -24,9 +24,8 @@ class HookController extends \Controller {
 	 */
 	public function addHeadDataAction(\Contao\PageModel $objPage, \Contao\LayoutModel $objLayout, \Contao\PageRegular $objPageRegular) {
 		if (isset($objPage->ogTagsEnable) && $objPage->ogTagsEnable) {
-			$absoluteUri = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 			$ogTags = array();
-			$ogTags['og:url'] = self::replaceInsertTags(\Idna::decode(\Environment::get('base')).\Environment::get('indexFreeRequest'));
+			$ogTags['og:url'] = \Idna::decode(\Environment::get('base')).\Environment::get('indexFreeRequest');
 			$ogTags['og:site_name'] = $GLOBALS['TL_CONFIG']['websiteTitle'];
 			$ogTags['og:type'] = isset($objPage->ogType) && $objPage->ogType != '' ? $objPage->ogType : '';
 
@@ -39,12 +38,14 @@ class HookController extends \Controller {
 					}
 					$ogTags[$index] = $ogTagDate;
 				}
-				if (isset($ogTags['og:image']) && $ogTags['og:image'] != '' && is_file(TL_ROOT.TL_FILES_URL.'/'.$ogTags['og:image'])) {
-					$ogImage = $ogTags['og:image'];
-					unset($ogTags['og:image']);
-					$ogTags['og:image'] = $ogImage;
-					$image = TL_ROOT.TL_FILES_URL.'/'.$ogTags['og:image'];
-					$ogTags['og:image'] = \Idna::decode(\Environment::get('base')).$ogTags['og:image'];
+			}
+
+			if (isset($objPage->ogImage) && $objPage->ogImage != '') {
+				$objFile = \FilesModel::findByPk($objPage->ogImage);
+				$ogImage = $objFile ? (string)$objFile->path : '';
+				if (is_file(TL_ROOT.TL_FILES_URL.'/'.$ogImage)) {
+					$ogTags['og:image'] = \Idna::decode(\Environment::get('base')).$ogImage;
+					$image = TL_ROOT.TL_FILES_URL.'/'.$ogImage;
 					$imagesize = @getimagesize($image);
 					if ($imagesize) {
 						$ogTags['og:image:width'] = $imagesize[0];
@@ -55,25 +56,28 @@ class HookController extends \Controller {
 						$ogTags['og:image:type'] = $mimeType;
 					}
 				}
+			}
 
-				if (isset($ogTags['og:audio']) && $ogTags['og:audio'] != '' && is_file(TL_ROOT.TL_FILES_URL.'/'.$ogTags['og:audio'])) {
-					$ogAudio = $ogTags['og:audio'];
-					unset($ogTags['og:audio']);
-					$ogTags['og:audio'] = $ogAudio;
-					$audio = TL_ROOT.TL_FILES_URL.'/'.$ogTags['og:audio'];
-					$ogTags['og:audio'] = \Idna::decode(\Environment::get('base')).$ogTags['og:audio'];
+			if (isset($objPage->ogAudio) && $objPage->ogAudio != '') {
+				$objFile = \FilesModel::findByPk($objPage->ogAudio);
+				$ogAudio = $objFile ? (string)$objFile->path : '';
+				if (is_file(TL_ROOT.TL_FILES_URL.'/'.$ogAudio)) {
+					$ogTags['og:audio'] = \Idna::decode(\Environment::get('base')).$ogAudio;
+					$audio = TL_ROOT.TL_FILES_URL.'/'.$ogAudio;
 					$mimeType = @mime_content_type($audio);
 					if ($mimeType) {
 						$ogTags['og:audio:type'] = $mimeType;
 					}
 				}
+			}
 
-				if (isset($ogTags['og:video']) && $ogTags['og:video'] != '' && is_file(TL_ROOT.TL_FILES_URL.'/'.$ogTags['og:video'])) {
-					$ogVideo = $ogTags['og:video'];
-					unset($ogTags['og:video']);
-					$ogTags['og:video'] = $ogVideo;
-					$video = TL_ROOT.TL_FILES_URL.'/'.$ogTags['og:video'];
-					$ogTags['og:video'] = \Idna::decode(\Environment::get('base')).$ogTags['og:video'];
+			if (isset($objPage->ogVideo) && $objPage->ogVideo != '') {
+				$objFile = \FilesModel::findByPk($objPage->ogVideo);
+				$ogVideo = $objFile ? (string)$objFile->path : '';
+				if (is_file(TL_ROOT.TL_FILES_URL.'/'.$ogVideo)) {
+					$ogTags['og:video'] = \Idna::decode(\Environment::get('base')).$ogVideo;
+					$video = TL_ROOT.TL_FILES_URL.'/'.$ogVideo;
+					$ogVideo = \Idna::decode(\Environment::get('base')).$ogVideo;
 					$mimeType = @mime_content_type($video);
 					if ($mimeType) {
 						$ogTags['og:video:type'] = $mimeType;

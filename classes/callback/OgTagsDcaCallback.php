@@ -48,14 +48,7 @@ class OgTagsDcaCallback extends \Backend {
 	 * @return string
 	 */
 	public function pretendSavingField($varValue, \Contao\DC_Table $DC) {
-		if (in_array($DC->field, array('ogImage', 'ogAudio', 'ogVideo'))) {
-			$objFile = \FilesModel::findByPk((string)$varValue);
-			$varValue = $objFile ? (string)$objFile->path : '';
-		}
-		else {
-			$varValue = htmlentities((string)$varValue, ENT_QUOTES, 'utf-8');
-		}
-
+		$varValue = htmlentities((string)$varValue, ENT_QUOTES, 'utf-8');
 		$this->saveValues[$DC->field] = $varValue;
 
 		return '';
@@ -82,13 +75,7 @@ class OgTagsDcaCallback extends \Backend {
 			}
 			else {
 				foreach ($this->existingValues as $key => $value) {
-					if (in_array($key, array('ogImage', 'ogAudio', 'ogVideo'))) {
-						$objFile = \FilesModel::findByPath($value);
-						$value = $objFile ? $objFile->uuid : '';
-					}
-					else {
-						$value = html_entity_decode((string)$value, ENT_QUOTES, 'utf-8');
-					}
+					$value = html_entity_decode((string)$value, ENT_QUOTES, 'utf-8');
 					$this->existingValues[$key] = $value;
 				}
 			}
@@ -111,43 +98,10 @@ class OgTagsDcaCallback extends \Backend {
 	 * @param \Contao\DC_Table $DC
 	 * @return string
 	 */
-	public function loadImage($value, \Contao\DC_Table $DC) {
-		$this->loadExistingValues($DC);
-
-		return isset($this->existingValues['ogImage']) ? (string)$this->existingValues['ogImage'] : '';
-	}
-
-	/**
-	 * @param string $value
-	 * @param \Contao\DC_Table $DC
-	 * @return string
-	 */
 	public function loadDescription($value, \Contao\DC_Table $DC) {
 		$this->loadExistingValues($DC);
 
 		return isset($this->existingValues['ogDescription']) ? (string)$this->existingValues['ogDescription'] : '';
-	}
-
-	/**
-	 * @param string $value
-	 * @param \Contao\DC_Table $DC
-	 * @return string
-	 */
-	public function loadAudio($value, \Contao\DC_Table $DC) {
-		$this->loadExistingValues($DC);
-
-		return isset($this->existingValues['ogAudio']) ? (string)$this->existingValues['ogAudio'] : '';
-	}
-
-	/**
-	 * @param string $value
-	 * @param \Contao\DC_Table $DC
-	 * @return string
-	 */
-	public function loadVideo($value, \Contao\DC_Table $DC) {
-		$this->loadExistingValues($DC);
-
-		return isset($this->existingValues['ogVideo']) ? (string)$this->existingValues['ogVideo'] : '';
 	}
 
 	/**
