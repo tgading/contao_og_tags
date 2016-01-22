@@ -24,8 +24,9 @@ class HookController extends \Controller {
 	 */
 	public function addHeadDataAction(\Contao\PageModel $objPage, \Contao\LayoutModel $objLayout, \Contao\PageRegular $objPageRegular) {
 		if (isset($objPage->ogTagsEnable) && $objPage->ogTagsEnable) {
+			$absoluteUri = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 			$ogTags = array();
-			$ogTags['og:url'] = self::replaceInsertTags('{{env::path}}{{env::request}}');
+			$ogTags['og:url'] = self::replaceInsertTags(\Idna::decode(\Environment::get('base')).\Environment::get('indexFreeRequest'));
 			$ogTags['og:site_name'] = $GLOBALS['TL_CONFIG']['websiteTitle'];
 			$ogTags['og:type'] = isset($objPage->ogType) && $objPage->ogType != '' ? $objPage->ogType : '';
 
@@ -38,13 +39,12 @@ class HookController extends \Controller {
 					}
 					$ogTags[$index] = $ogTagDate;
 				}
-
 				if (isset($ogTags['og:image']) && $ogTags['og:image'] != '' && is_file(TL_ROOT.TL_FILES_URL.'/'.$ogTags['og:image'])) {
 					$ogImage = $ogTags['og:image'];
 					unset($ogTags['og:image']);
 					$ogTags['og:image'] = $ogImage;
 					$image = TL_ROOT.TL_FILES_URL.'/'.$ogTags['og:image'];
-					$ogTags['og:image'] = self::replaceInsertTags('{{env::path}}').$ogTags['og:image'];
+					$ogTags['og:image'] = \Idna::decode(\Environment::get('base')).$ogTags['og:image'];
 					$imagesize = @getimagesize($image);
 					if ($imagesize) {
 						$ogTags['og:image:width'] = $imagesize[0];
@@ -61,7 +61,7 @@ class HookController extends \Controller {
 					unset($ogTags['og:audio']);
 					$ogTags['og:audio'] = $ogAudio;
 					$audio = TL_ROOT.TL_FILES_URL.'/'.$ogTags['og:audio'];
-					$ogTags['og:audio'] = self::replaceInsertTags('{{env::path}}').$ogTags['og:audio'];
+					$ogTags['og:audio'] = \Idna::decode(\Environment::get('base')).$ogTags['og:audio'];
 					$mimeType = @mime_content_type($audio);
 					if ($mimeType) {
 						$ogTags['og:audio:type'] = $mimeType;
@@ -73,7 +73,7 @@ class HookController extends \Controller {
 					unset($ogTags['og:video']);
 					$ogTags['og:video'] = $ogVideo;
 					$video = TL_ROOT.TL_FILES_URL.'/'.$ogTags['og:video'];
-					$ogTags['og:video'] = self::replaceInsertTags('{{env::path}}').$ogTags['og:video'];
+					$ogTags['og:video'] = \Idna::decode(\Environment::get('base')).$ogTags['og:video'];
 					$mimeType = @mime_content_type($video);
 					if ($mimeType) {
 						$ogTags['og:video:type'] = $mimeType;
