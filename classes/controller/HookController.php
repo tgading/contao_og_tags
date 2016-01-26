@@ -41,47 +41,38 @@ class HookController extends \Controller {
 			}
 
 			if (isset($objPage->ogImage) && $objPage->ogImage != '') {
-				$objFile = \FilesModel::findByPk($objPage->ogImage);
-				$ogImage = $objFile ? (string)$objFile->path : '';
-				if (is_file(TL_ROOT.TL_FILES_URL.'/'.$ogImage)) {
-					$ogTags['og:image'] = \Idna::decode(\Environment::get('base')).$ogImage;
-					$image = TL_ROOT.TL_FILES_URL.'/'.$ogImage;
-					$imagesize = @getimagesize($image);
-					if ($imagesize) {
-						$ogTags['og:image:width'] = $imagesize[0];
-						$ogTags['og:image:height'] = $imagesize[1];
-					}
-					$mimeType = @mime_content_type($image);
-					if ($mimeType) {
-						$ogTags['og:image:type'] = $mimeType;
-					}
+				$fileInfo = $this->getFileInfo($objPage->ogImage, true);
+				if (isset($fileInfo['url'])) {
+					$ogTags['og:image'] = $fileInfo['url'];
+				}
+				if (isset($fileInfo['mime_type'])) {
+					$ogTags['og:image:type'] = $fileInfo['mime_type'];
+				}
+				if (isset($fileInfo['width'])) {
+					$ogTags['og:image:width'] = $fileInfo['width'];
+				}
+				if (isset($fileInfo['height'])) {
+					$ogTags['og:image:height'] = $fileInfo['height'];
 				}
 			}
 
 			if (isset($objPage->ogAudio) && $objPage->ogAudio != '') {
-				$objFile = \FilesModel::findByPk($objPage->ogAudio);
-				$ogAudio = $objFile ? (string)$objFile->path : '';
-				if (is_file(TL_ROOT.TL_FILES_URL.'/'.$ogAudio)) {
-					$ogTags['og:audio'] = \Idna::decode(\Environment::get('base')).$ogAudio;
-					$audio = TL_ROOT.TL_FILES_URL.'/'.$ogAudio;
-					$mimeType = @mime_content_type($audio);
-					if ($mimeType) {
-						$ogTags['og:audio:type'] = $mimeType;
-					}
+				$fileInfo = $this->getFileInfo($objPage->ogAudio);
+				if (isset($fileInfo['url'])) {
+					$ogTags['og:audio'] = $fileInfo['url'];
+				}
+				if (isset($fileInfo['mime_type'])) {
+					$ogTags['og:audio:type'] = $fileInfo['mime_type'];
 				}
 			}
 
 			if (isset($objPage->ogVideo) && $objPage->ogVideo != '') {
-				$objFile = \FilesModel::findByPk($objPage->ogVideo);
-				$ogVideo = $objFile ? (string)$objFile->path : '';
-				if (is_file(TL_ROOT.TL_FILES_URL.'/'.$ogVideo)) {
-					$ogTags['og:video'] = \Idna::decode(\Environment::get('base')).$ogVideo;
-					$video = TL_ROOT.TL_FILES_URL.'/'.$ogVideo;
-					$ogVideo = \Idna::decode(\Environment::get('base')).$ogVideo;
-					$mimeType = @mime_content_type($video);
-					if ($mimeType) {
-						$ogTags['og:video:type'] = $mimeType;
-					}
+				$fileInfo = $this->getFileInfo($objPage->ogVideo);
+				if (isset($fileInfo['url'])) {
+					$ogTags['og:video'] = $fileInfo['url'];
+				}
+				if (isset($fileInfo['mime_type'])) {
+					$ogTags['og:video:type'] = $fileInfo['mime_type'];
 				}
 			}
 
@@ -91,6 +82,50 @@ class HookController extends \Controller {
 				}
 			}
 		}
+	}
+
+	/**
+	 * @param string $filePk
+	 * @param bool $isImage
+	 * @return array
+	 */
+	protected function getFileInfo($filePk, $isImage = false) {
+		$fileInfo = array();
+
+		$objFile = \FilesModel::findByPk($filePk);
+		$ogImage = $objFile ? (string)$objFile->path : '';
+		if ($ogImage != '') {
+			$baseUrl = \Idna::decode(\Environment::get('base'));
+			if ($baseUrl == '') {
+				$baseUrl = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].substr($_SERVER['PHP_SELF'], 0, -9);
+			}
+			$fileInfo['url'] = $baseUrl.$ogImage;
+
+			if (file_exists(TL_ROOT.TL_FILES_URL.'/'.$ogImage)) {
+				$image = TL_ROOT.TL_FILES_URL.'/'.$ogImage;
+			}
+			elseif (file_exists(TL_ROOT.'/'.$ogImage)) {
+				$image = TL_ROOT.'/'.$ogImage;
+			}
+			else {
+				$image = dirname(__FILE__).'/../../../../../'.$ogImage;
+			}
+
+			$mimeType = @mime_content_type($image);
+			if ($mimeType) {
+				$fileInfo['mime_type'] = $mimeType;
+			}
+
+			if ($isImage) {
+				$imagesize = @getimagesize($image);
+				if ($imagesize) {
+					$fileInfo['width'] = $imagesize[0];
+					$fileInfo['height'] = $imagesize[1];
+				}
+			}
+		}
+
+		return $fileInfo;
 	}
 
 }
