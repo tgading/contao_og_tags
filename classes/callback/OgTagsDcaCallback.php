@@ -6,9 +6,9 @@ namespace OgTags\Callback;
  * og_tags
  * Extension for Contao Open Source CMS (contao.org)
  *
- * Copyright (c) 2015 Thorsten Gading
+ * Copyright (c) 2016 Thorsten Gading
  *
- * @copyright 	Thorsten Gading 2015 <http://www.tossn.de/>
+ * @copyright 	Thorsten Gading 2016 <http://www.tossn.de/>
  * @author 		Thorsten Gading <http://www.tossn.de/>
  * @link 		http://www.tossn.de
  * @package 	OgTags
@@ -48,7 +48,7 @@ class OgTagsDcaCallback extends \Backend {
 	 * @return string
 	 */
 	public function pretendSavingField($varValue, \Contao\DC_Table $DC) {
-		$varValue = htmlentities((string)$varValue, ENT_QUOTES, 'utf-8');
+		$varValue = htmlspecialchars((string)$varValue, ENT_QUOTES, mb_detect_encoding((string)$varValue));
 		$this->saveValues[$DC->field] = $varValue;
 
 		return '';
@@ -75,7 +75,7 @@ class OgTagsDcaCallback extends \Backend {
 			}
 			else {
 				foreach ($this->existingValues as $key => $value) {
-					$value = html_entity_decode((string)$value, ENT_QUOTES, 'utf-8');
+					$value = htmlspecialchars_decode((string)$value);
 					$this->existingValues[$key] = $value;
 				}
 			}
