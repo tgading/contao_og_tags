@@ -48,7 +48,7 @@ class OgTagsDcaCallback extends \Backend {
 	 * @return string
 	 */
 	public function pretendSavingField($varValue, \Contao\DC_Table $DC) {
-		$varValue = htmlspecialchars((string)$varValue, ENT_QUOTES, mb_detect_encoding((string)$varValue));
+		$varValue = htmlspecialchars((string)$varValue, ENT_QUOTES, $this->getEncoding($varValue));
 		$this->saveValues[$DC->field] = $varValue;
 
 		return '';
@@ -75,7 +75,7 @@ class OgTagsDcaCallback extends \Backend {
 			}
 			else {
 				foreach ($this->existingValues as $key => $value) {
-					$value = htmlspecialchars_decode((string)$value);
+					$value = htmlspecialchars_decode((string)$value, ENT_QUOTES);
 					$this->existingValues[$key] = $value;
 				}
 			}
@@ -454,6 +454,19 @@ class OgTagsDcaCallback extends \Backend {
 		$this->loadExistingValues($DC);
 
 		return isset($this->existingValues['profileGender']) ? (string)$this->existingValues['profileGender'] : '';
+	}
+
+	/**
+	 * @param string $value
+	 * @return string
+	 */
+	protected function getEncoding($value) {
+		$encoding = mb_detect_encoding((string)$value);
+		if (!in_array($encoding, mb_list_encodings())) {
+			$encoding = 'UTF-8';
+		}
+
+		return $encoding;
 	}
 
 }
