@@ -3,9 +3,9 @@
  * og_tags
  * Extension for Contao Open Source CMS (contao.org)
  *
- * Copyright (c) 2015 Thorsten Gading
+ * Copyright (c) 2016 Thorsten Gading
  *
- * @copyright 	Thorsten Gading 2015 <http://www.tossn.de/>
+ * @copyright 	Thorsten Gading 2016 <http://www.tossn.de/>
  * @author 		Thorsten Gading <http://www.tossn.de/>
  * @link 		http://www.tossn.de
  * @package 	OgTags
@@ -98,15 +98,9 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['ogImage'] = array(
 		'fieldType' => 'radio',
 		'maxlength' => 255,
 		'filesOnly' => true,
-		'tl_class' => 'clr w50 wizard',
-		'doNotSaveEmpty' => true,
+		'tl_class' => 'clr  wizard',
 	),
-	'load_callback' => array(
-		array('OgTags\Callback\OgTagsDcaCallback', 'loadImage'),
-	),
-	'save_callback' => array(
-		array('OgTags\Callback\OgTagsDcaCallback', 'pretendSavingField')
-	),
+	'sql' => "binary(16) NULL",
 );
 
 $GLOBALS['TL_DCA']['tl_page']['fields']['ogDescription'] = array(
@@ -135,15 +129,9 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['ogAudio'] = array(
 		'fieldType' => 'radio',
 		'maxlength' => 255,
 		'filesOnly' => true,
-		'tl_class' => 'clr w50 wizard',
-		'doNotSaveEmpty' => true,
+		'tl_class' => 'clr  wizard',
 	),
-	'load_callback' => array(
-		array('OgTags\Callback\OgTagsDcaCallback', 'loadAudio'),
-	),
-	'save_callback' => array(
-		array('OgTags\Callback\OgTagsDcaCallback', 'pretendSavingField')
-	),
+	'sql' => "binary(16) NULL",
 );
 
 $GLOBALS['TL_DCA']['tl_page']['fields']['ogVideo'] = array(
@@ -154,15 +142,9 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['ogVideo'] = array(
 		'fieldType' => 'radio',
 		'maxlength' => 255,
 		'filesOnly' => true,
-		'tl_class' => 'w50 wizard',
-		'doNotSaveEmpty' => true,
+		'tl_class' => 'clr  wizard',
 	),
-	'load_callback' => array(
-		array('OgTags\Callback\OgTagsDcaCallback', 'loadVideo'),
-	),
-	'save_callback' => array(
-		array('OgTags\Callback\OgTagsDcaCallback', 'pretendSavingField')
-	),
+	'sql' => "binary(16) NULL",
 );
 
 $GLOBALS['TL_DCA']['tl_page']['fields']['ogDeterminer'] = array(

@@ -3,9 +3,9 @@
  * og_tags
  * Extension for Contao Open Source CMS (contao.org)
  *
- * Copyright (c) 2015 Thorsten Gading
+ * Copyright (c) 2016 Thorsten Gading
  *
- * @copyright 	Thorsten Gading 2015 <http://www.tossn.de/>
+ * @copyright 	Thorsten Gading 2016 <http://www.tossn.de/>
  * @author 		Thorsten Gading <http://www.tossn.de/>
  * @link 		http://www.tossn.de
  * @package 	OgTags
@@ -20,7 +20,7 @@ $GLOBALS['TL_LANG']['tl_page']['og_tags_legend'] = 'Open Graph Protocol';
 $GLOBALS['TL_LANG']['tl_page']['ogTagsEnable'] = array('Open graph protocol meta tags', 'Add open graph protocol meta tags.');
 $GLOBALS['TL_LANG']['tl_page']['ogTitle'] = array('Page title', 'Please enter a page title.');
 $GLOBALS['TL_LANG']['tl_page']['ogType'] = array('Type', 'Please enter a page type.');
-$GLOBALS['TL_LANG']['tl_page']['ogImage'] = array('Image', 'Please choose a image.');
+$GLOBALS['TL_LANG']['tl_page']['ogImage'] = array('Image', 'Please choose an image.');
 $GLOBALS['TL_LANG']['tl_page']['ogDescription'] = array('Page description', 'Please enter a page description.');
 $GLOBALS['TL_LANG']['tl_page']['ogAudio'] = array('Audio file', 'Here you can choose a audio image.');
 $GLOBALS['TL_LANG']['tl_page']['ogVideo'] = array('Video file', 'Here you can choose a video image.');
