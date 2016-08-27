@@ -37,9 +37,9 @@ class OgTagsDcaCallback extends \Backend {
 		}
 
 		$query = "UPDATE tl_page ".
-					"SET ogTags = '".$values."' ".
+					"SET ogTags = ? ".
 					"WHERE id = ? ";
-		$this->Database->prepare($query)->execute($DC->id);
+		$this->Database->prepare($query)->execute($values, $DC->id);
 	}
 
 	/**
