@@ -36,13 +36,13 @@ $GLOBALS['TL_LANG']['tl_page']['musicAlbumMusician'] = array('Von welchem Musike
 $GLOBALS['TL_LANG']['tl_page']['musicReleaseDate'] = array('Das Datum, an dem das Album erschienen ist', 'Bitte tragen Sie das Datum ein, an dem das Album erschienen ist.');
 $GLOBALS['TL_LANG']['tl_page']['musicCreator'] = array('Wer hat die Playlist erstellt', 'Bitte tragen Sie ein, wer die Playlist erstellt hat.');
 
-$GLOBALS['TL_LANG']['tl_page']['videoActor'] = array('Schauspieler des Films', 'Bitte Tragen Sie Schauspieler ein, die in dem Film mitspielen.');
+$GLOBALS['TL_LANG']['tl_page']['videoActor'] = array('Schauspieler des Films', 'Bitte tragen Sie Schauspieler ein, die in dem Film mitspielen.');
 $GLOBALS['TL_LANG']['tl_page']['videoActorRole'] = array('Die Rollen, die die Schauspieler spielen', 'Bitte tragen Sie die Rollen ein, die die Schauspieler spielen.');
 $GLOBALS['TL_LANG']['tl_page']['videoDirector'] = array('Regisseur', 'Bitte tragen Sie den Regisseur ein.');
 $GLOBALS['TL_LANG']['tl_page']['videoWriter'] = array('Schreiber des Drehbuchs', 'Bitte tragen Sie den Schreiber des Drehbuchs ein.');
 $GLOBALS['TL_LANG']['tl_page']['videoDuration'] = array('Länge des Films in Sekunden', 'Bitte tragen Sie die Länge des Films in Sekunden ein.');
 $GLOBALS['TL_LANG']['tl_page']['videoReleaseDate'] = array('Erscheinungsjahr des Films', 'Bitte tragen Sie das Erscheinungsjahr des Films ein.');
-$GLOBALS['TL_LANG']['tl_page']['videoTag'] = array('Tags', 'Bitte Tragen Sie Schlüsselwörter ein.');
+$GLOBALS['TL_LANG']['tl_page']['videoTag'] = array('Tags', 'Bitte tragen Sie Schlüsselwörter ein.');
 $GLOBALS['TL_LANG']['tl_page']['videoSeries'] = array('Zu welcher Serie gehört diese Episode', 'Bitte Tragen Sie ein, zu welcher Serie diese Episode gehört.');
 
 $GLOBALS['TL_LANG']['tl_page']['articlePublishedTime'] = array('Erscheinungszeitpunkt des Artikels', 'Bitte tragen Sie den Erscheinungszeitpunkt des Artikels ein.');
@@ -65,16 +65,16 @@ $GLOBALS['TL_LANG']['tl_page']['profileGender'] = array('Geschlecht', 'Bitte wä
 $GLOBALS['TL_LANG']['tl_page']['og_tags_type_options']['website'] = 'Webseite';
 $GLOBALS['TL_LANG']['tl_page']['og_tags_type_options']['article'] = 'Artikel';
 $GLOBALS['TL_LANG']['tl_page']['og_tags_type_options']['book'] = 'Buch';
-$GLOBALS['TL_LANG']['tl_page']['og_tags_type_options']['profile'] = 'Profiel';
+$GLOBALS['TL_LANG']['tl_page']['og_tags_type_options']['profile'] = 'Profil';
 $GLOBALS['TL_LANG']['tl_page']['og_tags_type_options']['music'] = 'Musik';
 $GLOBALS['TL_LANG']['tl_page']['og_tags_type_options']['music.song'] = 'Musik: Song';
-$GLOBALS['TL_LANG']['tl_page']['og_tags_type_options']['music.album'] = 'Musik: Slbum';
+$GLOBALS['TL_LANG']['tl_page']['og_tags_type_options']['music.album'] = 'Musik: Album';
 $GLOBALS['TL_LANG']['tl_page']['og_tags_type_options']['music.playlist'] = 'Musik: Playlist';
 $GLOBALS['TL_LANG']['tl_page']['og_tags_type_options']['music.radio_station'] = 'Musik: Radiostation';
 $GLOBALS['TL_LANG']['tl_page']['og_tags_type_options']['video'] = 'Video';
 $GLOBALS['TL_LANG']['tl_page']['og_tags_type_options']['video.movie'] = 'Video: Film';
 $GLOBALS['TL_LANG']['tl_page']['og_tags_type_options']['video.episode'] = 'Video: Episode';
-$GLOBALS['TL_LANG']['tl_page']['og_tags_type_options']['video.tv_show'] = 'Video: TV show';
+$GLOBALS['TL_LANG']['tl_page']['og_tags_type_options']['video.tv_show'] = 'Video: TV Show';
 $GLOBALS['TL_LANG']['tl_page']['og_tags_type_options']['video.other'] = 'Video: Sonstiges';
 
 $GLOBALS['TL_LANG']['tl_page']['og_tags_gender']['female'] = 'weiblich';
