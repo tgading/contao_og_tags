@@ -55,10 +55,6 @@ class HookController extends \Controller {
 					$ogTags['og:image:height'] = $fileInfo['height'];
 				}
 			}
-			
-			if (isset($objPage->ogTitle) && $objPage->ogTitle != '') {
-				$ogTags['og:title'] = $objPage->ogTitle;
-			}
 
 			if (isset($objPage->ogAudio) && $objPage->ogAudio != '') {
 				$fileInfo = $this->getFileInfo($objPage->ogAudio);
