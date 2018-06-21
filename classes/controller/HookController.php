@@ -78,7 +78,9 @@ class HookController extends \Controller {
 
 			foreach ($ogTags as $property => $content) {
 				if ($content != '') {
-					$GLOBALS['TL_HEAD'][] = '<meta property="'.$property.'" content="'.str_replace("\n", ' ', $content).'" />';
+					if (!isset($GLOBALS['TL_HEAD']['og_tags_'.$property])) {
+						$GLOBALS['TL_HEAD']['og_tags_'.$property] = '<meta property="'.$property.'" content="'.str_replace("\n", ' ', $content).'" />';
+					}
 				}
 			}
 		}
